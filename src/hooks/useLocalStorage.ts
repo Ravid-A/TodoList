@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { SetLocalstorageValue } from "@/types";
 
 const useLocalStorage = <T>(key: string, initialValue: T) => {
   const getStoredValue = (): T => {
@@ -13,7 +14,7 @@ const useLocalStorage = <T>(key: string, initialValue: T) => {
 
   const [storedValue, setStoredValue] = useState<T>(getStoredValue);
 
-  const setValue = (value: T | ((val: T) => T)) => {
+  const setValue: SetLocalstorageValue<T> = (value: T | ((val: T) => T)) => {
     try {
       const valueToStore =
         value instanceof Function ? value(storedValue) : value;

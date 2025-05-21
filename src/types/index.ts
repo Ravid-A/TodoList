@@ -13,8 +13,17 @@ export interface TaskState {
   nextId: number;
 }
 
+export type SetLocalstorageValue<T> = (value: T | ((val: T) => T)) => void;
+
 export type TaskAction =
-  | { type: "ADD_TASK"; payload: string }
-  | { type: "TOGGLE_TASK"; payload: number }
-  | { type: "DELETE_TASK"; payload: number }
-  | { type: "UPDATE_TASK_TITLE"; payload: { id: number; title: string } };
+  | { type: "ADD_TASK"; title: string }
+  | { type: "TOGGLE_TASK"; id: number }
+  | { type: "DELETE_TASK"; id: number }
+  | { type: "UPDATE_TASK_TITLE"; id: number; title: string };
+
+export type TasksUtils = {
+  addTask: (title: string) => void;
+  toggleTask: (id: number) => void;
+  deleteTask: (id: number) => void;
+  updateTaskTitle: (id: number, title: string) => void;
+};

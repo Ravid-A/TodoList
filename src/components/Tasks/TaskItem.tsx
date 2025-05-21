@@ -1,49 +1,37 @@
-import { useState } from "react";
-import type { Task, TaskFunction, UpdateTaskFunction } from "../../types";
-import { List, Typography } from "antd";
+import { Checkbox, List } from "antd";
+import type { CheckboxProps } from "antd";
+
+import { Trash2, Pencil } from "lucide-react";
+
+import type { Task } from "@/types";
+import { useTasksUtils } from "@/store/TasksReducer";
 
 interface TaskItemProps {
   task: Task;
-  toggleTask: TaskFunction;
-  // deleteTask: TaskFunction;
-  // updateTaskTitle: UpdateTaskFunction;
 }
 
-const TaskItem = ({ task, toggleTask }: TaskItemProps) => {
-  // const [editing, setEditing] = useState<boolean>(false);
-  // const [newTitle, setNewTitle] = useState<string>(task.title);
+const TaskItem = ({ task }: TaskItemProps) => {
+  const { toggleTask } = useTasksUtils();
 
-  // const handleToggle = () => {
-  //   toggleTask(task.id);
-  // };
-
-  // const handleDelete = () => {
-  //   deleteTask(task.id);
-  // };
-
-  // const handleDoubleClick = () => {
-  //   if (!task.completed) {
-  //     setEditing(!editing);
-  //   }
-  // };
-
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setNewTitle(event.target.value);
-  // };
-
-  // const handleSaveTitle = () => {
-  //   updateTaskTitle(task.id, newTitle);
-  //   setEditing(false);
-  // };
+  const onChange: CheckboxProps["onChange"] = () => {
+    toggleTask(task.id);
+  };
 
   return (
     <List.Item
       actions={[
-        <a key="list-loadmore-edit">edit</a>,
-        <a key="list-loadmore-more">more</a>,
+        <a key="list-loadmore-edit">
+          <Pencil />
+        </a>,
+        <a key="list-loadmore-more">
+          <Trash2 />
+        </a>,
       ]}
     >
-      <Typography.Text mark>[ITEM]</Typography.Text> {task.title}
+      <div>
+        <Checkbox onChange={onChange} style={{}} />
+        <bdi className="task-title">{task.title}</bdi>
+      </div>
     </List.Item>
   );
 };

@@ -1,18 +1,32 @@
-import Search from "antd/es/input/Search";
+import { Input, Radio } from "antd";
 
 const TaskSearchbar = () => {
-  const onSearch = (val: string) => {
-    console.log(val);
-  };
-
   return (
-    <div className="searchbar-container">
-      <Search
+    <div
+      style={{
+        padding: "20px",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <Input
         placeholder="חיפוש..."
         allowClear
-        onSearch={onSearch}
-        style={{ width: 200 }}
+        style={{
+          width: "300px",
+          maxWidth: "100%",
+        }}
       />
+
+      <div style={{ marginLeft: 8, display: "flex", alignItems: "center" }}>
+        <span style={{ marginRight: "1rem", marginLeft: "1rem" }}>
+          מיון לפי:
+        </span>
+        <Radio.Group defaultValue="asc">
+          <Radio.Button value="asc">↑</Radio.Button>
+          <Radio.Button value="desc">↓</Radio.Button>
+        </Radio.Group>
+      </div>
     </div>
   );
 };
