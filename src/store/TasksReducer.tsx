@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useReducer,
-  createContext,
-  useContext,
-  useEffect,
-} from "react";
+import { useCallback, useReducer, createContext, useContext } from "react";
 import type { ReactNode } from "react";
 
 import type { TaskState, TaskAction, Task, TasksUtils } from "@/types";
@@ -60,24 +54,16 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
     savedState
   );
 
-  // Save state changes to localStorage
-  useEffect(() => {
-    saveState(savedState);
-  }, [savedState, saveState]);
-
   const tasksUtils: TasksUtils = {
     addTask: useCallback((title: string) => {
       dispatch({ type: "ADD_TASK", title });
     }, []),
-
     toggleTask: useCallback((id: number) => {
       dispatch({ type: "TOGGLE_TASK", id });
     }, []),
-
     deleteTask: useCallback((id: number) => {
       dispatch({ type: "DELETE_TASK", id });
     }, []),
-
     updateTaskTitle: useCallback((id: number, title: string) => {
       dispatch({ type: "UPDATE_TASK_TITLE", id, title });
     }, []),
