@@ -29,7 +29,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
       ]}
     >
       <div>
-        <Checkbox onChange={onChange} style={{}} />
+        <Checkbox checked={task.completed} onChange={onChange} />
         <bdi className="task-title">{task.title}</bdi>
       </div>
     </List.Item>
