@@ -1,0 +1,156 @@
+/* body {
+  background: #f5f6fa;
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  margin: auto;
+  width: 50%;
+} */
+
+.rubik-300 {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300 !important;
+  font-style: normal;
+}
+
+.rubik-600 {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600 !important;
+  font-style: normal;
+}
+
+.app-container {
+  max-width: 500px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px 24px;
+  height: 550px;
+}
+
+.app-title {
+  text-align: center;
+  color: #2d3436;
+  margin-bottom: 24px;
+  font-size: 2rem;
+}
+
+.add-task-container {
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  padding: 10px 12px;
+  border: 1px solid #dfe6e9;
+  color: black;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.2s;
+  margin-right: 10px;
+  width: 70%;
+  background-color: white;
+}
+
+.todo-input:focus {
+  border-color: #0984e3;
+}
+
+.add-btn {
+  width: 20%;
+  margin-left: 0.25rem;
+  padding: 10px;
+  background: #0984e3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-btn:hover {
+  background: #74b9ff;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  max-height: 435px;
+  overflow: scroll;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f2f6;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.todo-item .completed {
+  text-decoration: line-through;
+  color: #636e72;
+  opacity: 0.7;
+}
+
+.todo-checkbox {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+}
+
+.todo-title {
+  margin: 0;
+  color: #2d3436;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.delete-btn {
+  background: none;
+  color: #d63031;
+  border-color: #d63031;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: color 0.2s;
+}
+
+.delete-btn:hover {
+  color: #b71c1c;
+  border-color: #b71c1c;
+}
+
+.update-task-input {
+  background: inherit;
+
+  padding: 10px 12px;
+  border: 1px solid #6b716f;
+  color: black;
+  border-radius: 6px;
+
+  text-align: center;
+  font-size: 1rem;
+
+  margin-right: 0.5rem;
+  height: inherit;
+}
+
+.update-task-save-btn {
+  background: #0984e3;
+}
+
+.update-task-save-btn:hover {
+  background: #74b9ff;
+}
