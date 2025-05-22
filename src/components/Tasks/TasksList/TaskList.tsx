@@ -1,6 +1,6 @@
 import { List } from "antd";
 
-import { useTasks, useTasksUtils } from "@/store/TasksReducer";
+import { useTasks, useTasksUtils } from "@/store/TasksContext";
 
 import { TaskItem } from "../TaskItem";
 import TaskListFooter from "./TaskListFooter";

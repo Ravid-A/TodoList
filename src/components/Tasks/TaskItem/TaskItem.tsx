@@ -1,7 +1,7 @@
 import { Checkbox, List } from "antd";
 
 import { TaskStatus, type Task } from "@/types";
-import { useTasksUtils } from "@/store/TasksReducer";
+import { useTasksUtils } from "@/store/TasksContext";
 import TaskAction from "./TaskAction";
 import { Pencil, Trash2 } from "lucide-react";
 

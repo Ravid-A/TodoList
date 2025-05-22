@@ -9,7 +9,7 @@ import { TaskList, TaskSearchbar } from "./components/Tasks";
 import { useState } from "react";
 import { TaskModal } from "./components/Modals";
 import { statusMap, type TaskFormValues } from "./types";
-import { useTasksUtils } from "./store/TasksReducer";
+import { useTasksUtils } from "./store/TasksContext";
 const { Content } = Layout;
 
 function App() {

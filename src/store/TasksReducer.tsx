@@ -1,17 +1,13 @@
-import { useCallback, useReducer, createContext, useContext } from "react";
-
+import { useCallback, useReducer } from "react";
 import {
   type TaskState,
   type TaskAction,
-  type Task,
   type TasksUtils,
   type BasicProvider,
   type TTaskStatus,
 } from "@/types";
 import useLocalStorage from "@/hooks/useLocalStorage";
-
-const tasksContext = createContext<Task[] | undefined>(undefined);
-const tasksUtilsContext = createContext<TasksUtils | undefined>(undefined);
+import { tasksContext, tasksUtilsContext } from "./TasksContext";
 
 const tasksReducer = (state: TaskState, action: TaskAction): TaskState => {
   switch (action.type) {
@@ -45,7 +41,7 @@ const tasksReducer = (state: TaskState, action: TaskAction): TaskState => {
   }
 };
 
-export const TasksProvider: React.FC<BasicProvider> = ({ children }) => {
+const TasksProvider: React.FC<BasicProvider> = ({ children }) => {
   const [savedState, saveState] = useLocalStorage<TaskState>("data", {
     tasks: [],
     nextId: 1,
@@ -83,21 +79,4 @@ export const TasksProvider: React.FC<BasicProvider> = ({ children }) => {
     </tasksContext.Provider>
   );
 };
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useTasks = () => {
-  const context = useContext(tasksContext);
-  if (context === undefined) {
-    throw new Error("useTasks must be used within a TaskProvider");
-  }
-  return context;
-};
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useTasksUtils = () => {
-  const context = useContext(tasksUtilsContext);
-  if (context === undefined) {
-    throw new Error("useTasksUtils must be used within a TaskProvider");
-  }
-  return context;
-};
+export default TasksProvider;
