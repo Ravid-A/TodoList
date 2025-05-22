@@ -6,9 +6,13 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import { TaskList, TaskSearchbar } from "./components/Tasks";
+import { AddTaskModal } from "./components/Modals/AddTask";
+import { useState } from "react";
 const { Content } = Layout;
 
 function App() {
+  const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
+
   return (
     <Layout>
       <Navbar />
@@ -23,9 +27,14 @@ function App() {
         <FloatButton
           icon={<PlusOutlined />}
           type="primary"
+          onClick={() => {
+            setIsAddTaskOpen(true);
+          }}
           style={{ insetInlineEnd: 24 }}
         />
       </Content>
+
+      <AddTaskModal open={isAddTaskOpen} setOpen={setIsAddTaskOpen} />
     </Layout>
   );
 }

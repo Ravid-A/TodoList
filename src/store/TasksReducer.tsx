@@ -13,7 +13,12 @@ const tasksReducer = (state: TaskState, action: TaskAction): TaskState => {
       return {
         tasks: [
           ...state.tasks,
-          { id: state.nextId, title: action.title, completed: false },
+          {
+            id: state.nextId,
+            title: action.title,
+            completed: false,
+            timestamp: new Date(),
+          },
         ],
         nextId: state.nextId + 1,
       };

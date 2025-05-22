@@ -2,6 +2,7 @@ export type Task = {
   id: number;
   title: string;
   completed: boolean;
+  timestamp: Date;
 };
 
 export type TaskFunction = (id: number) => void;
