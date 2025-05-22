@@ -5,6 +5,13 @@
   font-style: normal;
 }
 
+.rubik-600 {
+  font-family: "Rubik", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 600 !important;
+  font-style: normal;
+}
+
 .app-container {
   height: 100dvh;
 }
@@ -19,7 +26,6 @@
 .tasks-list {
   display: flex;
   justify-content: center;
-  max-height: 435px;
   margin-top: 2rem;
 }
 
@@ -33,4 +39,18 @@
 
 .ant-list-pagination {
   direction: ltr !important;
+}
+
+.edit-action {
+  color: lightsalmon;
+}
+
+.delete-action {
+  color: red;
+}
+
+.tasks-left {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.25rem !important;
 }

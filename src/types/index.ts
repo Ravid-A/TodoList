@@ -4,7 +4,7 @@ export type Task = {
   id: number;
   title: string;
   status: TTaskStatus;
-  timestamp: Date;
+  timestamp: number;
 };
 
 export type TaskFunction = (id: number) => void;
@@ -26,12 +26,16 @@ export type TaskAction =
       id: number;
       title: string;
       status: TTaskStatus;
+    }
+  | {
+      type: "DELETE_ALL_TASKS";
     };
 
 export type TasksUtils = {
   addTask: (title: string, status: TTaskStatus) => void;
   deleteTask: (id: number) => void;
   updateTask: (id: number, title: string, status: TTaskStatus) => void;
+  deleteAllTasks: () => void;
 };
 
 export interface BasicProvider {
@@ -61,3 +65,10 @@ export interface TaskFormValues {
   title: string;
   status: FormTaskStatus;
 }
+
+export type FilterMethod =
+  | "all"
+  | "completed"
+  | "in_progress"
+  | "not_completed";
+export type SortMethod = "DESC" | "ASC";

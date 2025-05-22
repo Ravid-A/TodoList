@@ -4,17 +4,21 @@ import type { ReactNode } from "react";
 interface TaskActionProps {
   title: string;
   children: ReactNode;
+  className: string;
   handleClick: () => void;
 }
 
 const TaskAction: React.FC<TaskActionProps> = ({
   title,
   children,
+  className,
   handleClick,
 }) => {
   return (
     <Tooltip title={title}>
-      <a onClick={handleClick}>{children}</a>
+      <a className={className} onClick={handleClick}>
+        {children}
+      </a>
     </Tooltip>
   );
 };

@@ -1,5 +1,5 @@
 import { FloatButton, Layout } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import Title from "antd/es/typography/Title";
 
 import "./App.css";
@@ -9,12 +9,12 @@ import { TaskList, TaskSearchbar } from "./components/Tasks";
 import { useState } from "react";
 import { TaskModal } from "./components/Modals";
 import { statusMap, type TaskFormValues } from "./types";
-import { useTasksUtils } from "./store/TasksContext";
+import { useTasksUtils } from "./store/TasksReducer";
 const { Content } = Layout;
 
 function App() {
   const [isAddTask, setIsAddTask] = useState<boolean>(false);
-  const { addTask } = useTasksUtils();
+  const { deleteAllTasks, addTask } = useTasksUtils();
 
   const onSave = (values: TaskFormValues) => {
     addTask(values.title, statusMap[values.status]);
@@ -38,7 +38,17 @@ function App() {
           onClick={() => {
             setIsAddTask(true);
           }}
-          style={{ insetInlineEnd: 24 }}
+          tooltip="להוסיף משימה"
+          style={{ insetInlineEnd: 100 }}
+        />
+        <FloatButton
+          icon={<DeleteOutlined />}
+          type="primary"
+          tooltip="למחוק את כל המשימות"
+          onClick={() => {
+            deleteAllTasks();
+          }}
+          style={{ insetInlineStart: 100 }}
         />
       </Content>
 

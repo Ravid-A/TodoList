@@ -1,7 +1,7 @@
 import { Checkbox, List } from "antd";
 
 import { TaskStatus, type Task } from "@/types";
-import { useTasksUtils } from "@/store/TasksContext";
+import { useTasksUtils } from "@/store/TasksReducer";
 import TaskAction from "./TaskAction";
 import { Pencil, Trash2 } from "lucide-react";
 
@@ -24,10 +24,18 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, handleEditTask }) => {
   return (
     <List.Item
       actions={[
-        <TaskAction title="ערוך משימה" handleClick={handleEditActionClick}>
+        <TaskAction
+          className="edit-action"
+          title="ערוך משימה"
+          handleClick={handleEditActionClick}
+        >
           <Pencil />
         </TaskAction>,
-        <TaskAction title="מחק משימה" handleClick={handleDeleteActionClick}>
+        <TaskAction
+          className="delete-action"
+          title="מחק משימה"
+          handleClick={handleDeleteActionClick}
+        >
           <Trash2 />
         </TaskAction>,
       ]}
