@@ -30,3 +30,7 @@
 .modal-title {
   font-size: 1.5rem !important;
 }
+
+.ant-list-pagination {
+  direction: ltr !important;
+}

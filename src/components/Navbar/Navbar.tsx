@@ -3,7 +3,7 @@ import { Layout, Menu } from "antd";
 
 const { Header } = Layout;
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   return (
     <Header style={{ display: "flex", alignItems: "center" }}>
       {/* <Logo /> */}

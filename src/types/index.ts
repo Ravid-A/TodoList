@@ -1,7 +1,9 @@
+import type { ReactNode } from "react";
+
 export type Task = {
   id: number;
   title: string;
-  completed: boolean;
+  status: TTaskStatus;
   timestamp: Date;
 };
 
@@ -17,14 +19,42 @@ export interface TaskState {
 export type SetLocalstorageValue<T> = (value: T | ((val: T) => T)) => void;
 
 export type TaskAction =
-  | { type: "ADD_TASK"; title: string }
+  | { type: "ADD_TASK"; title: string; status: TTaskStatus }
   | { type: "TOGGLE_TASK"; id: number }
   | { type: "DELETE_TASK"; id: number }
   | { type: "UPDATE_TASK_TITLE"; id: number; title: string };
 
 export type TasksUtils = {
-  addTask: (title: string) => void;
+  addTask: (title: string, status: TTaskStatus) => void;
   toggleTask: (id: number) => void;
   deleteTask: (id: number) => void;
   updateTaskTitle: (id: number, title: string) => void;
 };
+
+export interface BasicProvider {
+  children: ReactNode;
+}
+
+export const TaskStatus = {
+  STATUS_NOT_COMPLETED: 0,
+  STATUS_IN_PROGRESS: 1,
+  STATUS_COMPLETED: 2,
+};
+
+export type TTaskStatus =
+  | typeof TaskStatus.STATUS_NOT_COMPLETED
+  | typeof TaskStatus.STATUS_IN_PROGRESS
+  | typeof TaskStatus.STATUS_COMPLETED;
+
+export const statusMap = {
+  not_completed: TaskStatus.STATUS_NOT_COMPLETED,
+  in_progress: TaskStatus.STATUS_IN_PROGRESS,
+  completed: TaskStatus.STATUS_COMPLETED,
+} as const;
+
+export type FormTaskStatus = "not_completed" | "in_progress" | "completed";
+
+export interface TaskFormValues {
+  title: string;
+  status: FormTaskStatus;
+}

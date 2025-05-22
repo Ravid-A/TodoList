@@ -1,7 +1,14 @@
 import { useCallback, useReducer, createContext, useContext } from "react";
-import type { ReactNode } from "react";
 
-import type { TaskState, TaskAction, Task, TasksUtils } from "@/types";
+import {
+  type TaskState,
+  type TaskAction,
+  type Task,
+  type TasksUtils,
+  type BasicProvider,
+  TaskStatus,
+  type TTaskStatus,
+} from "@/types";
 import useLocalStorage from "@/hooks/useLocalStorage";
 
 const tasksContext = createContext<Task[] | undefined>(undefined);
@@ -16,7 +23,7 @@ const tasksReducer = (state: TaskState, action: TaskAction): TaskState => {
           {
             id: state.nextId,
             title: action.title,
-            completed: false,
+            status: action.status,
             timestamp: new Date(),
           },
         ],
@@ -26,7 +33,9 @@ const tasksReducer = (state: TaskState, action: TaskAction): TaskState => {
       return {
         ...state,
         tasks: state.tasks.map((task) =>
-          task.id === action.id ? { ...task, completed: !task.completed } : task
+          task.id === action.id
+            ? { ...task, status: TaskStatus.STATUS_COMPLETED }
+            : task
         ),
       };
     case "DELETE_TASK":
@@ -44,7 +53,7 @@ const tasksReducer = (state: TaskState, action: TaskAction): TaskState => {
   }
 };
 
-export const TasksProvider = ({ children }: { children: ReactNode }) => {
+export const TasksProvider: React.FC<BasicProvider> = ({ children }) => {
   const [savedState, saveState] = useLocalStorage<TaskState>("data", {
     tasks: [],
     nextId: 1,
@@ -60,8 +69,8 @@ export const TasksProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const tasksUtils: TasksUtils = {
-    addTask: useCallback((title: string) => {
-      dispatch({ type: "ADD_TASK", title });
+    addTask: useCallback((title: string, status: TTaskStatus) => {
+      dispatch({ type: "ADD_TASK", title, status });
     }, []),
     toggleTask: useCallback((id: number) => {
       dispatch({ type: "TOGGLE_TASK", id });

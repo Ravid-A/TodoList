@@ -6,12 +6,20 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import { TaskList, TaskSearchbar } from "./components/Tasks";
-import { AddTaskModal } from "./components/Modals/AddTask";
 import { useState } from "react";
+import { TaskModal } from "./components/Modals";
+import { statusMap, type TaskFormValues } from "./types";
+import { useTasksUtils } from "./store/TasksReducer";
 const { Content } = Layout;
 
 function App() {
   const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
+  const { addTask } = useTasksUtils();
+
+  const onSave = (values: TaskFormValues) => {
+    addTask(values.title, statusMap[values.status]);
+    setIsAddTaskOpen(false);
+  };
 
   return (
     <Layout>
@@ -34,7 +42,14 @@ function App() {
         />
       </Content>
 
-      <AddTaskModal open={isAddTaskOpen} setOpen={setIsAddTaskOpen} />
+      <TaskModal
+        open={isAddTaskOpen}
+        title="משימה חדשה"
+        onSave={onSave}
+        onCancel={() => {
+          setIsAddTaskOpen(false);
+        }}
+      />
     </Layout>
   );
 }

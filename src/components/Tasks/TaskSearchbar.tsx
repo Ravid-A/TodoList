@@ -1,6 +1,6 @@
 import { Input, Radio } from "antd";
 
-const TaskSearchbar = () => {
+const TaskSearchbar: React.FC = () => {
   return (
     <div
       style={{
