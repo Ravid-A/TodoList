@@ -6,7 +6,6 @@ import {
   type Task,
   type TasksUtils,
   type BasicProvider,
-  TaskStatus,
   type TTaskStatus,
 } from "@/types";
 import useLocalStorage from "@/hooks/useLocalStorage";
@@ -29,25 +28,18 @@ const tasksReducer = (state: TaskState, action: TaskAction): TaskState => {
         ],
         nextId: state.nextId + 1,
       };
-    case "TOGGLE_TASK":
-      return {
-        ...state,
-        tasks: state.tasks.map((task) =>
-          task.id === action.id
-            ? { ...task, status: TaskStatus.STATUS_COMPLETED }
-            : task
-        ),
-      };
     case "DELETE_TASK":
       return {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.id),
       };
-    case "UPDATE_TASK_TITLE":
+    case "UPDATE_TASK":
       return {
         ...state,
         tasks: state.tasks.map((task) =>
-          task.id === action.id ? { ...task, title: action.title } : task
+          task.id === action.id
+            ? { ...task, title: action.title, status: action.status }
+            : task
         ),
       };
   }
@@ -72,15 +64,15 @@ export const TasksProvider: React.FC<BasicProvider> = ({ children }) => {
     addTask: useCallback((title: string, status: TTaskStatus) => {
       dispatch({ type: "ADD_TASK", title, status });
     }, []),
-    toggleTask: useCallback((id: number) => {
-      dispatch({ type: "TOGGLE_TASK", id });
-    }, []),
     deleteTask: useCallback((id: number) => {
       dispatch({ type: "DELETE_TASK", id });
     }, []),
-    updateTaskTitle: useCallback((id: number, title: string) => {
-      dispatch({ type: "UPDATE_TASK_TITLE", id, title });
-    }, []),
+    updateTask: useCallback(
+      (id: number, title: string, status: TTaskStatus) => {
+        dispatch({ type: "UPDATE_TASK", id, title, status });
+      },
+      []
+    ),
   };
 
   return (

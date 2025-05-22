@@ -13,12 +13,12 @@ import { useTasksUtils } from "./store/TasksReducer";
 const { Content } = Layout;
 
 function App() {
-  const [isAddTaskOpen, setIsAddTaskOpen] = useState<boolean>(false);
+  const [isAddTask, setIsAddTask] = useState<boolean>(false);
   const { addTask } = useTasksUtils();
 
   const onSave = (values: TaskFormValues) => {
     addTask(values.title, statusMap[values.status]);
-    setIsAddTaskOpen(false);
+    setIsAddTask(false);
   };
 
   return (
@@ -36,18 +36,18 @@ function App() {
           icon={<PlusOutlined />}
           type="primary"
           onClick={() => {
-            setIsAddTaskOpen(true);
+            setIsAddTask(true);
           }}
           style={{ insetInlineEnd: 24 }}
         />
       </Content>
 
       <TaskModal
-        open={isAddTaskOpen}
+        open={isAddTask}
         title="משימה חדשה"
         onSave={onSave}
         onCancel={() => {
-          setIsAddTaskOpen(false);
+          setIsAddTask(false);
         }}
       />
     </Layout>

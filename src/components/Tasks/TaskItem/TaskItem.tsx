@@ -1,34 +1,41 @@
 import { Checkbox, List } from "antd";
-import type { CheckboxProps } from "antd";
 
 import { TaskStatus, type Task } from "@/types";
 import { useTasksUtils } from "@/store/TasksReducer";
-import DeleteTaskAction from "./DeleteTaskAction";
-import EditTaskAction from "./EditTaskAction";
+import TaskAction from "./TaskAction";
+import { Pencil, Trash2 } from "lucide-react";
 
 interface TaskItemProps {
   task: Task;
+  handleEditTask: (task: Task) => void;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
-  const { toggleTask } = useTasksUtils();
+const TaskItem: React.FC<TaskItemProps> = ({ task, handleEditTask }) => {
+  const { deleteTask } = useTasksUtils();
 
-  const onChange: CheckboxProps["onChange"] = () => {
-    toggleTask(task.id);
+  const handleEditActionClick = () => {
+    handleEditTask(task);
+  };
+
+  const handleDeleteActionClick = () => {
+    deleteTask(task.id);
   };
 
   return (
     <List.Item
       actions={[
-        <EditTaskAction taskId={task.id} />,
-        <DeleteTaskAction taskId={task.id} />,
+        <TaskAction title="ערוך משימה" handleClick={handleEditActionClick}>
+          <Pencil />
+        </TaskAction>,
+        <TaskAction title="מחק משימה" handleClick={handleDeleteActionClick}>
+          <Trash2 />
+        </TaskAction>,
       ]}
     >
       <div>
         <Checkbox
           checked={task.status === TaskStatus.STATUS_COMPLETED}
           indeterminate={task.status === TaskStatus.STATUS_IN_PROGRESS}
-          onChange={onChange}
           disabled
         />
         <bdi className="task-title">{task.title}</bdi>
